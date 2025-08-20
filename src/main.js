@@ -19,7 +19,7 @@
  * @param seller карточка продавца
  * @returns {number}
  */
-function calculateBonusByProfit(index, total, seller) {
+function calculateBonusByProfit(index, total) {
     // @TODO: Расчет бонуса от позиции в рейтинге
       if (index === 0) {
         return 0.15; // 15% для первого места

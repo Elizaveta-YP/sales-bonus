@@ -8,7 +8,8 @@
    // @TODO: Расчет выручки от операции
    function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
-    return purchase.sale_price * purchase.quantity * discountFactor;
+    const revenue = purchase.sale_price * purchase.quantity * discountFactor;
+    return Math.round(revenue * 100) / 100; 
 }
 
 
@@ -22,11 +23,11 @@
 function calculateBonusByProfit(index, total, seller) {
     // @TODO: Расчет бонуса от позиции в рейтинге
       if (index === 0) {
-        return  0.15; 
+        return  seller = 0.15; 
     } else if (index <= 2 && index > 0) {
-        return  0.1; 
+        return seller = 0.1; 
     } else if (index < total - 1) {
-        return  0.05; 
+        return  seller = 0.05; 
     } else {
         return 0; 
     }
@@ -155,7 +156,7 @@ function analyzeSalesData(data, options) {
             }
 
             // Расчет показателей
-            const revenue = options.calculateRevenue({
+           const revenue = options.calculateRevenue({
                 sale_price: item.sale_price,
                 quantity: item.quantity,
                 discount: item.discount || 0
@@ -184,6 +185,7 @@ function analyzeSalesData(data, options) {
     sellerStats.forEach((seller, index) => {
         seller.bonus_percent = options.calculateBonus(index, sellerStats.length, seller);
         seller.bonus_amount = seller.profit * seller.bonus_percent;
+       
         
         // Формирование топ-10 товаров
         seller.top_products = Object.entries(seller.products_sold)
@@ -196,7 +198,7 @@ function analyzeSalesData(data, options) {
     return sellerStats.map(seller => ({
         seller_id: seller.id.toString(),
         name: seller.name,
-        revenue: Math.ceil(seller.revenue.toFixed(2)),
+        revenue: Number(seller.revenue.toFixed(2)),
         profit: Number(seller.profit.toFixed(2)),
         sales_count: seller.sales_count,
         top_products: seller.top_products,

@@ -159,19 +159,19 @@ function analyzeSalesData(data, options) {
             }
 
             // Расчет показателей
-           const revenue = options.calculateRevenue({
-                sale_price: item.sale_price,
-                quantity: item.quantity,
-                discount: item.discount || 0
-            }, product);
-            
-            const cost = product.purchase_price * item.quantity;
-            const profit = Math.round((revenue - cost) * 100) / 100;
+          const revenue = options.calculateRevenue({
+        sale_price: item.sale_price,
+        quantity: item.quantity,
+        discount: item.discount || 0
+    }, product);
+    
+    const cost = product.purchase_price * item.quantity;
+    const profit = revenue - cost;
 
-            // Обновление статистики
-            sellerStat.revenue += revenue;
-            sellerStat.profit += profit;
-            
+    // Округлять при каждом сложении
+    sellerStat.revenue = Math.round((sellerStat.revenue + revenue) * 100) / 100;
+    sellerStat.profit = Math.round((sellerStat.profit + profit) * 100) / 100;
+    
             // Обновление счетчика товаров
             if (!sellerStat.products_sold[item.sku]) {
                 sellerStat.products_sold[item.sku] = 0;

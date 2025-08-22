@@ -33,6 +33,7 @@ function calculateBonusByProfit(index, total, seller) {
     } else {
         bonusPercentage = 0.05;
     }
+    
     return Math.floor(profit * bonusPercentage * 100) / 100;
 }
 
@@ -185,7 +186,12 @@ sellerStats.sort((a, b) => b.profit - a.profit);
 
 // Назначение бонусов
 sellerStats.forEach((seller, index) => { 
-   seller.bonus_amount = options.calculateBonus(index, sellerStats.length, seller, seller.profit);
+    seller.bonus_amount = options.calculateBonus(
+        index, 
+        sellerStats.length, 
+        seller, 
+        seller.profit // ← передаем рассчитанную прибыль
+    );
     
     
     // Формирование топ-10 товаров

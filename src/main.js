@@ -4,14 +4,12 @@
  * @param _product карточка товара
  * @returns {number}
  */
-// function calculateSimpleRevenue(purchase, _product) {
    // @TODO: Расчет выручки от операции
    function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
     const revenue = purchase.sale_price * purchase.quantity * discountFactor;
     return Math.round(revenue * 100) / 100; 
 }
-
 
 /**
  * Функция для расчета бонусов
@@ -20,31 +18,24 @@
  * @param seller карточка продавца
  * @returns {number}
  */
+
 function calculateBonusByProfit(index, total, seller) {
     // @TODO: Расчет бонуса от позиции в рейтинге
-    //   if (index === 0) {
-    //     return  seller = 0.15; 
-    // } else if (index <= 2 && index > 0) {
-    //     return seller = 0.1; 
-    // } else if (index < total - 1) {
-    //     return  seller = 0.05; 
-    // } else {
-    //     return 0; 
-    // }
-
-     const { profit } = seller;
+    const { profit } = seller;
+    let bonusAmount;
     
     if (index === 0) {
-        return profit * 0.15; // 15% для первого места
+        bonusAmount = profit * 0.15; // 15% для первого места
     } else if (index === 1 || index === 2) {
-        return profit * 0.10; // 10% для второго и третьего места
+        bonusAmount = profit * 0.10; // 10% для второго и третьего места
     } else if (index === total - 1) {
-        return 0; // 0% для последнего места
+        bonusAmount = 0; // 0% для последнего места
     } else {
-        return profit * 0.05; // 5% для всех остальных
+        bonusAmount = profit * 0.05; // 5% для всех остальных
     }
+    
+    return Math.round(bonusAmount * 100) / 100; // Округление до 2 знаков
 }
-
 
 /**
  * Функция для анализа данных продаж
@@ -182,7 +173,6 @@ function analyzeSalesData(data, options) {
             sellerStat.revenue += revenue;
             sellerStat.profit += profit;
             
-
             // Обновление счетчика товаров
             if (!sellerStat.products_sold[item.sku]) {
                 sellerStat.products_sold[item.sku] = 0;
@@ -196,10 +186,8 @@ function analyzeSalesData(data, options) {
 
     // Назначение бонусов
     sellerStats.forEach((seller, index) => {
-        seller.bonus_percent = options.calculateBonus(index, sellerStats.length, seller);
-        seller.bonus_amount = seller.bonus_percent;
+           seller.bonus_amount = options.calculateBonus(index, sellerStats.length, seller);
        
-        
         // Формирование топ-10 товаров
         seller.top_products = Object.entries(seller.products_sold)
             .map(([sku, quantity]) => ({ sku, quantity }))

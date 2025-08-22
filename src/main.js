@@ -171,6 +171,9 @@ function analyzeSalesData(data, options) {
     // Округлять при каждом сложении
     sellerStat.revenue = Math.round((sellerStat.revenue + revenue) * 100) / 100;
     sellerStat.profit = Math.round((sellerStat.profit + profit) * 100) / 100;
+
+    sellerStat.revenue = Math.round((sellerStat.revenue + revenue) * 100) / 100;
+sellerStat.profit = Math.round((sellerStat.profit + profit) * 100) / 100;
     
             // Обновление счетчика товаров
             if (!sellerStat.products_sold[item.sku]) {
@@ -185,7 +188,11 @@ function analyzeSalesData(data, options) {
 
     // Назначение бонусов
     sellerStats.forEach((seller, index) => {
-           seller.bonus_amount = options.calculateBonus(index, sellerStats.length, seller);
+    // Передаем объект с profit в calculateBonus
+    seller.bonus_amount = options.calculateBonus(index, sellerStats.length, {
+        ...sellerIndex[seller.id], // оригинальные данные продавца
+        profit: seller.profit      // добавляем рассчитанную прибыль
+    }); 
        
         // Формирование топ-10 товаров
         seller.top_products = Object.entries(seller.products_sold)

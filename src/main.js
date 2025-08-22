@@ -25,13 +25,13 @@ function calculateBonusByProfit(index, total, seller) {
     let bonusAmount;
     
     if (index === 0) {
-        bonusAmount = profit * 0.15; // 15% для первого места
+        bonusAmount = 0.15; // 15% для первого места
     } else if (index === 1 || index === 2) {
-        bonusAmount = profit * 0.10; // 10% для второго и третьего места
+        bonusAmount = 0.10; // 10% для второго и третьего места
     } else if (index === total - 1) {
         bonusAmount = 0; // 0% для последнего места
     } else {
-        bonusAmount = profit * 0.05; // 5% для всех остальных
+        bonusAmount = 0.05; // 5% для всех остальных
     }
     
     return Math.round(bonusAmount * 100) / 100; // Округление до 2 знаков

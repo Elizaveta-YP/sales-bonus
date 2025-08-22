@@ -210,7 +210,7 @@ sellerStats.forEach((seller, index) => {
     profit: Math.round(seller.profit * 100) / 100,
     sales_count: seller.sales_count,
     top_products: seller.top_products,
-    bonus: Math.round(seller.bonus_amount * 100) / 100
+    bonus: Math.floor(seller.bonus_amount * 100) / 100
 }));
 }
 

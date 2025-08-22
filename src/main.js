@@ -22,19 +22,19 @@
 function calculateBonusByProfit(index, total, seller) {
     // @TODO: Расчет бонуса от позиции в рейтинге
     const { profit } = seller;
-    let bonusAmount;
+     let bonusPercentage;
     
     if (index === 0) {
-        bonusAmount = 0.15; // 15% для первого места
+        bonusPercentage = 0.15;
     } else if (index === 1 || index === 2) {
-        bonusAmount = 0.10; // 10% для второго и третьего места
+        bonusPercentage = 0.10;
     } else if (index === total - 1) {
-        bonusAmount = 0; // 0% для последнего места
+        bonusPercentage = 0;
     } else {
-        bonusAmount = 0.05; // 5% для всех остальных
+        bonusPercentage = 0.05;
     }
     
-    return Math.round(bonusAmount * 100) / 100; // Округление до 2 знаков
+    return Math.round(profit * bonusPercentage * 100) / 100;
 }
 
 /**
@@ -185,10 +185,9 @@ function analyzeSalesData(data, options) {
 sellerStats.sort((a, b) => b.profit - a.profit);
 
 // Назначение бонусов
-sellerStats.forEach((seller, index) => {
-    const bonusPercentage = options.calculateBonus(index, sellerStats.length, seller);
-    seller.bonus_amount = seller.profit * bonusPercentage;
-    seller.bonus_amount = Math.round(seller.bonus_amount * 100) / 100;
+sellerStats.forEach((seller, index) => { 
+   seller.bonus_amount = options.calculateBonus(index, sellerStats.length, seller, seller.profit);
+    
     
     // Формирование топ-10 товаров
     seller.top_products = Object.entries(seller.products_sold)
@@ -208,3 +207,4 @@ sellerStats.forEach((seller, index) => {
     bonus: Math.round(seller.bonus_amount * 100) / 100
 }));
 }
+

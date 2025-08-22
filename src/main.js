@@ -206,7 +206,7 @@ sellerStats.forEach((seller, index) => {
     seller_id: seller.id.toString(),
     name: seller.name,
     revenue: Math.round(seller.revenue * 100) / 100,
-    profit: Math.floor(seller.profit * 100) / 100,
+    profit: Math.round(seller.profit * 100) / 100,
     sales_count: seller.sales_count,
     top_products: seller.top_products,
     bonus: Math.round(seller.bonus_amount * 100) / 100

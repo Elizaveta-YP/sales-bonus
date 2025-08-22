@@ -25,16 +25,15 @@ function calculateBonusByProfit(index, total, seller) {
     let bonusPercentage;
     
     if (index === 0) {
-        bonusPercentage = 0.15; // 15% для первого места
+        bonusPercentage = 0.15; 
     } else if (index <= 2 && index > 0) {
-        bonusPercentage = 0.10; // 10% для второго и третьего места
+        bonusPercentage = 0.10; 
     } else if (index < total - 1) {
-        bonusPercentage = 0.05; // 5% для всех остальных
+        bonusPercentage = 0.05; 
     } else {
-        bonusPercentage = 0; // 0% для последнего места
+        bonusPercentage = 0; 
     }
     
-    // Рассчитываем денежную сумму бонуса и округляем до 2 знаков
     return Math.round(profit * bonusPercentage * 100) / 100;
 }
 
@@ -169,7 +168,7 @@ function analyzeSalesData(data, options) {
         const cost = product.purchase_price * item.quantity;
         const profit = Math.round((revenue - cost) * 100) / 100; 
 
-        // Обновление статистики (без лишнего округления)
+        // Обновление статистики 
         sellerStat.revenue += revenue;
         sellerStat.profit += profit;
     
@@ -191,7 +190,7 @@ sellerStats.forEach((seller, index) => {
         index, 
         sellerStats.length, 
         seller, 
-        // seller.profit // ← передаем рассчитанную прибыль
+        seller.profit // ← передаем рассчитанную прибыль
     );
     
     

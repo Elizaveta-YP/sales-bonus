@@ -35,7 +35,7 @@ function calculateBonusByProfit(index, total, seller) {
     }
     
     // Рассчитываем денежную сумму бонуса и округляем до 2 знаков
-    return Math.ceil(profit * bonusPercentage * 100) / 100;
+    return Math.floor(profit * bonusPercentage * 100) / 100;
 }
 
 /**
@@ -191,7 +191,7 @@ sellerStats.forEach((seller, index) => {
         index, 
         sellerStats.length, 
         seller, 
-        seller.profit // ← передаем рассчитанную прибыль
+        // seller.profit // ← передаем рассчитанную прибыль
     );
     
     
@@ -210,7 +210,7 @@ sellerStats.forEach((seller, index) => {
     profit: Math.ceil(seller.profit * 100) / 100,
     sales_count: seller.sales_count,
     top_products: seller.top_products,
-    bonus: Math.ceil(seller.bonus_amount * 100) / 100
+    bonus: Math.floor(seller.bonus_amount * 100) / 100
 }));
 }
 

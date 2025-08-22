@@ -125,7 +125,6 @@ function analyzeSalesData(data, options) {
         profit: 0,
         sales_count: 0,
         products_sold: {},
-        bonus_percent: 0,
         bonus_amount: 0
     }));
 
@@ -167,7 +166,7 @@ function analyzeSalesData(data, options) {
             }, product);
             
             const cost = product.purchase_price * item.quantity;
-            const profit = revenue - cost;
+            const profit = Math.round((revenue - cost) * 100) / 100;
 
             // Обновление статистики
             sellerStat.revenue += revenue;

@@ -22,19 +22,20 @@
 function calculateBonusByProfit(index, total, seller) {
     // @TODO: Расчет бонуса от позиции в рейтинге
     const { profit } = seller;
-     let bonusPercentage;
+    let bonusPercentage;
     
     if (index === 0) {
-        bonusPercentage = 0.15;
-    } else if (index === 1 || index === 2) {
-        bonusPercentage = 0.10;
-    } else if (index === total - 1) {
-        bonusPercentage = 0;
+        bonusPercentage = 0.15; // 15% для первого места
+    } else if (index <= 2 && index > 0) {
+        bonusPercentage = 0.10; // 10% для второго и третьего места
+    } else if (index < total - 1) {
+        bonusPercentage = 0.05; // 5% для всех остальных
     } else {
-        bonusPercentage = 0.05;
+        bonusPercentage = 0; // 0% для последнего места
     }
     
-    return Math.floor(profit * bonusPercentage * 100) / 100;
+    // Рассчитываем денежную сумму бонуса и округляем до 2 знаков
+    return Math.round(profit * bonusPercentage * 100) / 100;
 }
 
 /**

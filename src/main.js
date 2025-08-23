@@ -7,8 +7,7 @@
    function calculateSimpleRevenue(purchase, _product) {
     const { discount, sale_price, quantity } = purchase;
     const discountFactor = 1 - (discount / 100);
-    const revenue = sale_price * quantity * discountFactor;
-    return Math.round(revenue * 100) / 100; 
+    return sale_price * quantity * discountFactor; 
 }
 
 /**
@@ -33,7 +32,8 @@ function calculateBonusByProfit(index, total, seller) {
     } else {
         bonusPercentage = 0; 
     }
-      return profit * bonusPercentage;
+    const bonusAmount = profit * bonusPercentage;
+      return Math.floor(bonusAmount * 100) / 100;
 }
 
 /**

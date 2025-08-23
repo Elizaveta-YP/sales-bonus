@@ -198,7 +198,7 @@ sellerStats.forEach((seller, index) => {
    return sellerStats.map(seller => ({
     seller_id: seller.id.toString(),
     name: seller.name,
-    revenue: Math.ceil(seller.revenue * 100) / 100,
+    revenue: Math.ceil(+seller.revenue.toFixed(2) * 100) / 100,
     profit: +seller.profit.toFixed(2),
     sales_count: seller.sales_count,
     top_products: seller.top_products,

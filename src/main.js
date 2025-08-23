@@ -33,8 +33,7 @@ function calculateBonusByProfit(index, total, seller) {
     } else {
         bonusPercentage = 0; 
     }
-      const bonusAmount = profit * bonusPercentage;
-    return Math.floor(bonusAmount * 100) / 100; 
+      return profit * bonusPercentage;
 }
 
 /**

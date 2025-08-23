@@ -33,7 +33,7 @@ function calculateBonusByProfit(index, total, seller) {
     } else {
         bonusPercentage = 0; 
     }
-      return profit.toFixed(2) * bonusPercentage;
+      return profit * bonusPercentage;
 }
 
 /**
@@ -189,7 +189,6 @@ sellerStats.forEach((seller, index) => {
         index, 
         sellerStats.length, 
         seller, 
-        seller.profit // ← передаем рассчитанную прибыль
     );
     
     

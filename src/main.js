@@ -374,7 +374,7 @@ function analyzeSalesData(data, options) {
             }, product);
             
             const cost = product.purchase_price * item.quantity;
-            const profit = Math.ceil((revenue - cost) * 100) / cost;
+            const profit = Math.ceil((revenue - cost) * 100) / 100;
 
             // Обновление статистики с округлением
             sellerStat.revenue = Math.round((sellerStat.revenue + revenue) * 100) / 100;

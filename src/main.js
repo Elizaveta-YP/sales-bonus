@@ -9,7 +9,7 @@
     const { discount, sale_price, quantity } = purchase;
     const discountFactor = 1 - (discount / 100);
     const revenue = sale_price * quantity * discountFactor; 
-     return Math.round(revenue * 100) / 100;
+    return revenue; 
 }
 
 /**
@@ -169,8 +169,8 @@ function analyzeSalesData(data, options) {
         const profit = revenue - cost; 
 
         // Обновление статистики 
-        sellerStat.revenue += revenue;
-        sellerStat.profit += profit;
+        sellerStat.revenue = Math.round((sellerStat.revenue + revenue) * 100) / 100;
+sellerStat.profit = Math.round((sellerStat.profit + profit) * 100) / 100;
     
             // Обновление счетчика товаров
             if (!sellerStat.products_sold[item.sku]) {

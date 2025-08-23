@@ -235,14 +235,14 @@ function calculateBonusByProfit(index, total, seller) {
     } else if (index === 1 || index === 2) {
         bonusPercentage = 0.10; // 10% для второго и третьего места
     } else if (index === total - 1) {
-        bonusPercentage = 0; // 0% для последнего места
+       bonusPercentage = 0; // 0% для последнего места
     } else {
-        bonusPercentage = 0.05; // 5% для всех остальных
+        bonusPercentage = 0.05 // 5% для всех остальных
     }
     
     // Округляем бонус до 2 знаков после запятой
     const bonusAmount = seller.profit * bonusPercentage;
-    return Math.round(bonusAmount * 100) / 100;
+    return Math.floor(bonusAmount * 100) / 100;
 }
 
 /**

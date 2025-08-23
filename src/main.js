@@ -241,7 +241,7 @@ function calculateBonusByProfit(index, total, seller) {
     
     // Округляем бонус до 2 знаков после запятой
     const bonusAmount = seller.profit * bonusPercentage;
-    return Math.round(bonusAmount * 100) / 100;
+    return Math.floor(bonusAmount * 100) / 100;
 }
 
 /**
@@ -374,7 +374,7 @@ function analyzeSalesData(data, options) {
             }, product);
             
             const cost = product.purchase_price * item.quantity;
-            const profit = Math.round((revenue - cost) * 100) / 100;
+            const profit = Math.ceil((revenue - cost) * 100) / cost;
 
             // Обновление статистики с округлением
             sellerStat.revenue = Math.round((sellerStat.revenue + revenue) * 100) / 100;

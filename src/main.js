@@ -406,7 +406,7 @@ function analyzeSalesData(data, options) {
         seller_id: seller.id.toString(),
         name: seller.name,
         revenue: Math.round(seller.revenue * 100) / 100,
-        profit: Math.round(seller.profit * 100) / 100,
+        profit: +seller.profit.toFixed(2),
         sales_count: seller.sales_count,
         top_products: seller.top_products,
         bonus: Math.round(seller.bonus * 100) / 100

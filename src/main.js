@@ -33,7 +33,7 @@ function calculateBonusByProfit(index, total, seller) {
     } else {
         bonusPercentage = 0; 
     }
-      return profit * bonusPercentage;
+      return profit;
 }
 
 /**

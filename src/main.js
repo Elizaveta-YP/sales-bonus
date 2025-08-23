@@ -215,7 +215,7 @@
 function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
     const revenue = purchase.sale_price * purchase.quantity * discountFactor;
-    return Math.round(revenue * 100) / 100; 
+    return Math.floor(revenue * 100) / 100; // Заменить Math.round на Math.floor
 }
 
 /**
@@ -226,20 +226,18 @@ function calculateSimpleRevenue(purchase, _product) {
  * @returns {number}
  */
 function calculateBonusByProfit(index, total, seller) {
-    // Расчет бонуса от позиции в рейтинге
     let bonusPercentage;
     
     if (index === 0) {
-        bonusPercentage = 0.15; // 15% для первого места
+        bonusPercentage = 0.15;
     } else if (index === 1 || index === 2) {
-        bonusPercentage = 0.10; // 10% для второго и третьего места
+        bonusPercentage = 0.10;
     } else if (index === total - 1) {
-        bonusPercentage = 0; // 0% для последнего места
+        bonusPercentage = 0;
     } else {
-        bonusPercentage = 0.05; // 5% для всех остальных
+        bonusPercentage = 0.05;
     }
     
-    // Округляем бонус до 2 знаков после запятой
     const bonusAmount = seller.profit * bonusPercentage;
     return Math.floor(bonusAmount * 100) / 100;
 }
@@ -367,18 +365,18 @@ function analyzeSalesData(data, options) {
             }
 
             // Расчет показателей с округлением
-            const revenue = options.calculateRevenue({
+             const revenue = options.calculateRevenue({
                 sale_price: item.sale_price,
                 quantity: item.quantity,
                 discount: item.discount || 0
             }, product);
             
             const cost = product.purchase_price * item.quantity;
-            const profit = Math.ceil((revenue - cost) * 100) / 100;
+            const profit = Math.floor((revenue - cost) * 100) / 100;
 
             // Обновление статистики с округлением
-            sellerStat.revenue = Math.round((sellerStat.revenue + revenue) * 100) / 100;
-            sellerStat.profit = Math.round((sellerStat.profit + profit) * 100) / 100;
+          sellerStat.revenue = Math.floor((sellerStat.revenue + revenue) * 100) / 100;
+            sellerStat.profit = Math.floor((sellerStat.profit + profit) * 100) / 100;
 
             // Учёт количества проданных товаров
             if (!sellerStat.products_sold[item.sku]) {
@@ -388,15 +386,14 @@ function analyzeSalesData(data, options) {
         });
     });
 
-    // Сортировка по прибыли (по убыванию)
+    // Сортировка по прибыли
     sellerStats.sort((a, b) => b.profit - a.profit);
 
-    // Назначение бонусов и формирование топ-10 товаров
+    // Назначение бонусов
     sellerStats.forEach((seller, index) => { 
         // Пересчитываем profit для точности перед расчетом бонуса
-        seller.profit = Math.round(seller.profit * 100) / 100;
+        seller.profit = Math.floor(seller.profit * 100) / 100; // FLOOR
         seller.bonus = options.calculateBonus(index, sellerStats.length, seller);
-        
         // Формирование топ-10 товаров
         seller.top_products = Object.entries(seller.products_sold)
             .map(([sku, quantity]) => ({ sku, quantity }))

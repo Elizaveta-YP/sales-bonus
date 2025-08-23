@@ -6,10 +6,9 @@
  */
    // @TODO: Расчет выручки от операции
    function calculateSimpleRevenue(purchase, _product) {
-    const { discount, sale_price, quantity } = purchase;
+       const { discount, sale_price, quantity } = purchase;
     const discountFactor = 1 - (discount / 100);
-    const revenue = sale_price * quantity * discountFactor; 
-    return revenue; 
+    return sale_price * quantity * discountFactor; 
 }
 
 /**
@@ -169,8 +168,8 @@ function analyzeSalesData(data, options) {
         const profit = revenue - cost; 
 
         // Обновление статистики 
-        sellerStat.revenue = Math.round((sellerStat.revenue + revenue) * 100) / 100;
-sellerStat.profit = Math.round((sellerStat.profit + profit) * 100) / 100;
+        sellerStat.revenue += revenue;
+        sellerStat.profit += profit;
     
             // Обновление счетчика товаров
             if (!sellerStat.products_sold[item.sku]) {

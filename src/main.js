@@ -1,14 +1,13 @@
-/**
- * Функция для расчета выручки
- * @param purchase запись о покупке
- * @param _product карточка товара
- * @returns {number}
- */
+// * Функция для расчета выручки
+ //* @param purchase запись о покупке
+ //* @param _product карточка товара
+ //* @returns {number}
+ //*
    // @TODO: Расчет выручки от операции
    function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
     const revenue = purchase.sale_price * purchase.quantity * discountFactor;
-     return Math.round(revenue * 100) / 100;
+    return revenue; 
 }
 
 /**
@@ -198,7 +197,7 @@ sellerStats.forEach((seller, index) => {
    return sellerStats.map(seller => ({
     seller_id: seller.id.toString(),
     name: seller.name,
-    revenue: +seller.revenue.toFixed(2),
+    revenue: Math.ceil(+seller.revenue * 100) / 100,
     profit: +seller.profit.toFixed(2),
     sales_count: seller.sales_count,
     top_products: seller.top_products,

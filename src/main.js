@@ -185,12 +185,7 @@ sellerStats.sort((a, b) => b.profit - a.profit);
 
 // Назначение бонусов
 sellerStats.forEach((seller, index) => { 
-    seller.bonus_amount = options.calculateBonus(
-        index, 
-        sellerStats.length, 
-        seller, 
-    );
-    
+    seller.bonus_amount = options.calculateBonus(index, sellerStats.length, seller);
     
     // Формирование топ-10 товаров
     seller.top_products = Object.entries(seller.products_sold)

@@ -216,7 +216,7 @@
 function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
     const revenue = purchase.sale_price * purchase.quantity * discountFactor;
-    return Math.floor(revenue * 100) / 100;
+    return revenue;
 }
 
 /**
@@ -391,7 +391,7 @@ function analyzeSalesData(data, options) {
     // Назначение бонусов и формирование топ-10 товаров
     sellerStats.forEach((seller, index) => { 
         // Округляем profit перед расчетом бонуса
-        seller.profit = Math.round(seller.profit * 100) / 100;
+        seller.profit = seller.profit;
         seller.bonus = options.calculateBonus(index, sellerStats.length, seller);
         
         // Формирование топ-10 товаров

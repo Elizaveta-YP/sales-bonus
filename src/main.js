@@ -216,7 +216,7 @@
 function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
     const revenue = purchase.sale_price * purchase.quantity * discountFactor;
-    return Math.floor(revenue * 100) / 100;
+    return Math.round(revenue * 100) / 100;
 }
 
 /**
@@ -242,7 +242,7 @@ function calculateBonusByProfit(index, total, seller) {
     
     // Округляем бонус до 2 знаков после запятой
     const bonusAmount = seller.profit * bonusPercentage;
-    return Math.floor(bonusAmount * 100) / 100;
+    return Math.round(bonusAmount * 100) / 100;
 }
 
 /**
@@ -390,6 +390,8 @@ function analyzeSalesData(data, options) {
 
     // Назначение бонусов и формирование топ-10 товаров
     sellerStats.forEach((seller, index) => { 
+        // Округляем profit перед расчетом бонуса
+        seller.profit = Math.round(seller.profit * 100) / 100;
         seller.bonus = options.calculateBonus(index, sellerStats.length, seller);
         
         // Формирование топ-10 товаров
@@ -403,10 +405,10 @@ function analyzeSalesData(data, options) {
     return sellerStats.map(seller => ({
         seller_id: seller.id.toString(),
         name: seller.name,
-        revenue: Math.floor(seller.revenue * 100) / 100,
-        profit: Math.floor(seller.profit * 100) / 100,
+        revenue: Math.round(seller.revenue * 100) / 100,
+        profit: Math.round(seller.profit * 100) / 100,
         sales_count: seller.sales_count,
         top_products: seller.top_products,
-        bonus: Math.floor(seller.bonus * 100) / 100
+        bonus: Math.round(seller.bonus * 100) / 100
     }));
 }

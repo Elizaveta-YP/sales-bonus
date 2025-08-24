@@ -490,7 +490,7 @@ function calculateBonusByProfit(index, total, seller) {
    function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
     const revenue = purchase.sale_price * purchase.quantity * discountFactor;
-    Math.floor(revenue);
+    Math.floor(revenue.toFixed(2));
     return revenue; 
 }
 
@@ -681,7 +681,7 @@ sellerStats.forEach((seller, index) => {
    return sellerStats.map(seller => ({
     seller_id: seller.id.toString(),
     name: seller.name,
-    revenue: +seller.revenue.toFixed(3),
+    revenue: +seller.revenue.toFixed(2),
     profit: +seller.profit.toFixed(2),
     sales_count: seller.sales_count,
     top_products: seller.top_products,

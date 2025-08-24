@@ -5,11 +5,12 @@
  * @returns {number}
  */
    // @TODO: Расчет выручки от операции
-      function calculateSimpleRevenue(purchase, _product) {
+   function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
     const revenue = purchase.sale_price * purchase.quantity * discountFactor;
     return revenue; 
 }
+
 /**
  * Функция для расчета бонусов
  * @param index порядковый номер в отсортированном массиве
@@ -197,13 +198,14 @@ sellerStats.forEach((seller, index) => {
    return sellerStats.map(seller => ({
     seller_id: seller.id.toString(),
     name: seller.name,
-    revenue: +seller.revenue.toFixed(2),
+    revenue: Math.ceil(+seller.revenue * 100) / 100,
     profit: +seller.profit.toFixed(2),
     sales_count: seller.sales_count,
     top_products: seller.top_products,
     bonus: +seller.bonus_amount.toFixed(2) 
 }));
 }
+
 
 
 

@@ -43,16 +43,6 @@ function calculateBonusByProfit(index, total, seller) {
  * @returns {{revenue, top_products, bonus, name, sales_count, profit, seller_id}[]}
  */
 
-// Определяем функции
-const calculateRevenue = calculateSimpleRevenue;
-const calculateBonus = calculateBonusByProfit;
-
-// Вызываем analyzeSalesData с правильными опциями
-const result = analyzeSalesData(data, {
-    calculateRevenue: calculateRevenue,
-    calculateBonus: calculateBonus
-});
-
 function analyzeSalesData(data, options) {
     
     // Проверка основных данных
@@ -96,11 +86,11 @@ function analyzeSalesData(data, options) {
     }
 
     //определю новые опции
-//     const calculateRevenue =calculateSimpleRevenue;
-//    const calculateBonus = calculateBonusByProfit;
+    const calculateRevenue =calculateSimpleRevenue;
+   const calculateBonus = calculateBonusByProfit;
 
     // Проверка опций
-    const { calculateRevenue, calculateBonus } = options;
+    // const { calculateRevenue, calculateBonus } = options;
 
     // Создаем индексы
     const sellerIndex = {};

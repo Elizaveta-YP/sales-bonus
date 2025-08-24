@@ -5,13 +5,11 @@
  * @returns {number}
  */
    // @TODO: Расчет выручки от операции
-   function calculateSimpleRevenue(purchase, _product) {
-    const { discount, sale_price, quantity } = purchase;
-    const discountFactor = 1 - (discount / 100);
-    const revenue = sale_price * quantity * discountFactor; 
-    return revenue;
+      function calculateSimpleRevenue(purchase, _product) {
+    const discountFactor = 1 - (purchase.discount / 100);
+    const revenue = purchase.sale_price * purchase.quantity * discountFactor;
+    return revenue; 
 }
-
 /**
  * Функция для расчета бонусов
  * @param index порядковый номер в отсортированном массиве

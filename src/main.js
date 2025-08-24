@@ -126,7 +126,6 @@ function analyzeSalesData(data, options) {
         products_sold: {},
         bonus_amount: 0
     }));
-    
 
     // Обработка покупок
     data.purchase_records.forEach(record => {
@@ -197,7 +196,7 @@ sellerStats.forEach((seller, index) => {
 
     // Формирование результата
    return sellerStats.map(seller => ({
-    seller_id: seller.id,
+    seller_id: seller.id.toString(),
     name: seller.name,
     revenue: +seller.revenue.toFixed(2),
     profit: +seller.profit.toFixed(2),

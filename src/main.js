@@ -43,7 +43,18 @@ function calculateBonusByProfit(index, total, seller) {
  * @returns {{revenue, top_products, bonus, name, sales_count, profit, seller_id}[]}
  */
 
+// Определяем функции
+const calculateRevenue = calculateSimpleRevenue;
+const calculateBonus = calculateBonusByProfit;
+
+// Вызываем analyzeSalesData с правильными опциями
+const result = analyzeSalesData(data, {
+    calculateRevenue: calculateRevenue,
+    calculateBonus: calculateBonus
+});
+
 function analyzeSalesData(data, options) {
+    
     // Проверка основных данных
     if (!data
         || !Array.isArray(data.sellers) || data.sellers.length === 0
@@ -84,13 +95,12 @@ function analyzeSalesData(data, options) {
         throw new Error('Некорректные данные в items: проверьте sku, quantity и sale_price');
     }
 
+    //определю новые опции
+//     const calculateRevenue =calculateSimpleRevenue;
+//    const calculateBonus = calculateBonusByProfit;
+
     // Проверка опций
-    if (!options
-        || typeof options.calculateRevenue !== 'function'
-        || typeof options.calculateBonus !== 'function'
-    ) {
-        throw new Error('Некорректные опции: должны быть переданы функции calculateRevenue и calculateBonus');
-    }
+    const { calculateRevenue, calculateBonus } = options;
 
     // Создаем индексы
     const sellerIndex = {};

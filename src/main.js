@@ -8,7 +8,7 @@
    function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - (purchase.discount / 100);
     const revenue = purchase.sale_price * purchase.quantity * discountFactor;
-    return Math.floor(revenue); 
+    return revenue; 
 }
 
 /**
@@ -314,7 +314,7 @@ function analyzeSalesData(data, options) {
             }
 
             // ВАЖНО: Используем функции ИЗ ОПЦИЙ
-            const revenue = calculateRevenue({
+            const revenue = calculateSimpleRevenue({
                 sale_price: item.sale_price,
                 quantity: item.quantity,
                 discount: item.discount || 0

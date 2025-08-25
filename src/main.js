@@ -736,10 +736,7 @@ function calculateBonusByProfit(index, total, seller) {
     }
       return profit * bonusPercentage;
 }
-const result = analyzeSalesData(data, {
-    calculateRevenue: calculateSimpleRevenue,
-    calculateBonus: calculateBonusByProfit
-});
+
 /**
  * Функция для анализа данных продаж
  * @param data
